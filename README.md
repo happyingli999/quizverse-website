@@ -1,2 +1,2 @@
-# quizeverse_website
+# quizverse-website
 quizverse official website
