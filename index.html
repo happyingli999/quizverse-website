@@ -143,7 +143,8 @@ loveService:'<path d="M350 420 H550 V560 H350 Z" fill="#d9c5ed" stroke="#f4dca7"
 loveTouch:'<path d="M450 560 C390 500 330 440 350 360 C370 290 435 300 450 360 C465 300 530 290 550 360 C570 440 510 500 450 560 Z" fill="#e9c4d7" stroke="#f4dca7" stroke-width="7"/><path d="M450 390 V500 M400 430 L450 470 L500 430" fill="none" stroke="#f4dca7" stroke-width="8" stroke-linecap="round"/>'
 };
 function cardSvg(r,kind,key){
- const palette=kind==='personality'?{a:'#211d3b',b:'#70578f',c:'#c7a9d9'}:{a:'#29213d',b:'#77618e',c:'#d9b9c9'};
+ const palettes={personality:{a:'#211d3b',b:'#70578f',c:'#c7a9d9'},aesthetic:{a:'#14243f',b:'#496b91',c:'#c5d6e8'},love:{a:'#48243b',b:'#a95f79',c:'#f0c7b8'}};
+ const palette=palettes[kind]||palettes.personality;
  const art=cardArt[key]||cardArt.Observer;
  const esc=s=>String(s).replace(/[&<>"]/g,ch=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[ch]));
  const eyebrow=kind==='personality'?'YOUR HIDDEN ARCHETYPE':kind==='love'?'YOUR LOVE LANGUAGE':'YOUR AESTHETIC';
