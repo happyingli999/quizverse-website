@@ -143,12 +143,41 @@ loveService:'<path d="M350 420 H550 V560 H350 Z" fill="#d9c5ed" stroke="#f4dca7"
 loveTouch:'<path d="M450 560 C390 500 330 440 350 360 C370 290 435 300 450 360 C465 300 530 290 550 360 C570 440 510 500 450 560 Z" fill="#e9c4d7" stroke="#f4dca7" stroke-width="7"/><path d="M450 390 V500 M400 430 L450 470 L500 430" fill="none" stroke="#f4dca7" stroke-width="8" stroke-linecap="round"/>'
 };
 function cardSvg(r,kind,key){
- const palettes={personality:{a:'#211d3b',b:'#70578f',c:'#c7a9d9'},aesthetic:{a:'#14243f',b:'#496b91',c:'#c5d6e8'},love:{a:'#48243b',b:'#a95f79',c:'#f0c7b8'}};
- const palette=palettes[kind]||palettes.personality;
+ const palettes={
+  personality:{bg:'#fbf5ff',mid:'#eadcf7',light:'#d7c0eb',ink:'#59456f',accent:'#a987c5',foil:'#c6a36f'},
+  aesthetic:{bg:'#f3f9ff',mid:'#dcebf7',light:'#c5dced',ink:'#3e5b76',accent:'#7fa6c7',foil:'#b69b70'},
+  love:{bg:'#fff6f4',mid:'#f8e1e4',light:'#efc9d1',ink:'#75485a',accent:'#c17d91',foil:'#c5a078'}
+ };
+ const p=palettes[kind]||palettes.personality;
  const art=cardArt[key]||cardArt.Observer;
  const esc=s=>String(s).replace(/[&<>"]/g,ch=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[ch]));
  const eyebrow=kind==='personality'?'YOUR HIDDEN ARCHETYPE':kind==='love'?'YOUR LOVE LANGUAGE':'YOUR AESTHETIC';
- return '<svg xmlns="http://www.w3.org/2000/svg" width="900" height="1125" viewBox="0 0 900 1125"><defs><linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop stop-color="'+palette.a+'"/><stop offset=".58" stop-color="'+palette.b+'"/><stop offset="1" stop-color="'+palette.c+'"/></linearGradient><radialGradient id="glow"><stop stop-color="#fff" stop-opacity=".28"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></radialGradient></defs><rect width="900" height="1125" rx="34" fill="url(#bg)"/><circle cx="720" cy="250" r="280" fill="url(#glow)"/><circle cx="150" cy="900" r="230" fill="url(#glow)"/><rect x="34" y="34" width="832" height="1057" rx="24" fill="none" stroke="#f4dca7" stroke-opacity=".65" stroke-width="2"/><path d="M110 160 H790 M110 930 H790" stroke="#f4dca7" stroke-opacity=".45" stroke-width="2"/><g fill="#f4dca7" opacity=".8"><circle cx="160" cy="230" r="5"/><circle cx="740" cy="180" r="4"/><circle cx="700" cy="810" r="5"/><circle cx="205" cy="760" r="4"/></g><text x="450" y="115" fill="#fff8ec" text-anchor="middle" font-family="Georgia,serif" font-size="29" letter-spacing="9">QUIZVERSE</text><text x="450" y="205" fill="#f4dca7" text-anchor="middle" font-family="Arial,sans-serif" font-size="20" letter-spacing="6">'+eyebrow+'</text><g>'+art+'</g><text x="450" y="735" fill="#fff8ec" text-anchor="middle" font-family="Georgia,serif" font-size="62">'+esc(r.name)+'</text><text x="450" y="795" fill="#fff8ec" text-anchor="middle" font-family="Arial,sans-serif" font-size="24">'+esc(r.line)+'</text><text x="450" y="1015" fill="#fff8ec" text-anchor="middle" font-family="Arial,sans-serif" font-size="18" letter-spacing="5">A LITTLE SELF-DISCOVERY</text></svg>';
+ const sparkle=(x,y,scale)=>'<g transform="translate('+x+' '+y+') scale('+scale+')" fill="'+p.foil+'" opacity=".8"><path d="M0 -16 Q3 -3 16 0 Q3 3 0 16 Q-3 3 -16 0 Q-3 -3 0 -16Z"/></g>';
+ return '<svg xmlns="http://www.w3.org/2000/svg" width="900" height="1125" viewBox="0 0 900 1125"><defs>'+
+ '<linearGradient id="paper" x1="0" y1="0" x2=".8" y2="1"><stop stop-color="'+p.bg+'"/><stop offset=".52" stop-color="'+p.mid+'"/><stop offset="1" stop-color="'+p.light+'"/></linearGradient>'+
+ '<radialGradient id="halo"><stop stop-color="#fff" stop-opacity=".98"/><stop offset=".56" stop-color="#fff" stop-opacity=".58"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></radialGradient>'+
+ '<linearGradient id="foil" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#fff4d9"/><stop offset=".48" stop-color="'+p.foil+'"/><stop offset="1" stop-color="#fff0d2"/></linearGradient>'+
+ '<filter id="softShadow" x="-30%" y="-30%" width="160%" height="160%"><feGaussianBlur in="SourceAlpha" stdDeviation="13" result="blur"/><feOffset dy="12" result="offset"/><feComponentTransfer><feFuncA type="linear" slope=".18"/></feComponentTransfer><feMerge><feMergeNode/><feMergeNode in="SourceGraphic"/></feMerge></filter>'+
+ '<pattern id="grain" width="34" height="34" patternUnits="userSpaceOnUse"><circle cx="4" cy="7" r="1" fill="'+p.ink+'" opacity=".055"/><circle cx="23" cy="25" r=".8" fill="'+p.ink+'" opacity=".045"/></pattern></defs>'+
+ '<rect width="900" height="1125" rx="34" fill="url(#paper)"/><rect width="900" height="1125" rx="34" fill="url(#grain)"/>'+
+ '<circle cx="450" cy="445" r="345" fill="url(#halo)"/>'+
+ '<rect x="34" y="34" width="832" height="1057" rx="25" fill="none" stroke="url(#foil)" stroke-width="2.5"/>'+
+ '<rect x="48" y="48" width="804" height="1029" rx="19" fill="none" stroke="#fff" stroke-opacity=".8" stroke-width="1.5"/>'+
+ '<g fill="none" stroke="url(#foil)" stroke-width="2" opacity=".8"><path d="M95 205 C145 145 205 145 265 205 M635 205 C695 145 755 145 805 205"/><path d="M95 920 C145 980 205 980 265 920 M635 920 C695 980 755 980 805 920"/></g>'+
+ '<g fill="none" stroke="'+p.accent+'" stroke-opacity=".36" stroke-width="2"><path d="M92 270 C145 235 165 190 160 145 M92 270 C130 260 155 270 177 300 M808 270 C755 235 735 190 740 145 M808 270 C770 260 745 270 723 300"/><path d="M92 855 C145 890 165 935 160 980 M92 855 C130 865 155 855 177 825 M808 855 C755 890 735 935 740 980 M808 855 C770 865 745 855 723 825"/></g>'+
+ '<g fill="'+p.accent+'" opacity=".42"><ellipse cx="151" cy="220" rx="10" ry="25" transform="rotate(-35 151 220)"/><ellipse cx="181" cy="278" rx="9" ry="22" transform="rotate(50 181 278)"/><ellipse cx="749" cy="220" rx="10" ry="25" transform="rotate(35 749 220)"/><ellipse cx="719" cy="278" rx="9" ry="22" transform="rotate(-50 719 278)"/><ellipse cx="151" cy="905" rx="10" ry="25" transform="rotate(35 151 905)"/><ellipse cx="749" cy="905" rx="10" ry="25" transform="rotate(-35 749 905)"/></g>'+
+ '<text x="450" y="112" fill="'+p.ink+'" text-anchor="middle" font-family="Georgia,serif" font-size="31" letter-spacing="10">QUIZVERSE</text>'+
+ '<path d="M365 145 H535" stroke="url(#foil)" stroke-width="2"/>'+sparkle(350,145,.55)+sparkle(550,145,.55)+
+ '<text x="450" y="198" fill="'+p.accent+'" text-anchor="middle" font-family="Arial,sans-serif" font-size="18" letter-spacing="5">'+eyebrow+'</text>'+
+ '<circle cx="450" cy="445" r="226" fill="#fff" opacity=".34"/><circle cx="450" cy="445" r="210" fill="none" stroke="#fff" stroke-width="2" opacity=".9"/><circle cx="450" cy="445" r="194" fill="none" stroke="url(#foil)" stroke-width="2" stroke-dasharray="2 12" opacity=".9"/>'+
+ '<g filter="url(#softShadow)">'+art+'</g>'+
+ sparkle(270,345,.72)+sparkle(630,390,.58)+sparkle(310,575,.48)+sparkle(600,570,.7)+
+ '<path d="M185 700 Q450 670 715 700" fill="none" stroke="url(#foil)" stroke-width="2"/>'+
+ '<text x="450" y="770" fill="'+p.ink+'" text-anchor="middle" font-family="Georgia,serif" font-size="57">'+esc(r.name)+'</text>'+
+ '<text x="450" y="824" fill="'+p.ink+'" opacity=".82" text-anchor="middle" font-family="Georgia,serif" font-style="italic" font-size="24">'+esc(r.line)+'</text>'+
+ '<path d="M345 900 H555" stroke="url(#foil)" stroke-width="2"/>'+
+ '<text x="450" y="963" fill="'+p.accent+'" text-anchor="middle" font-family="Arial,sans-serif" font-size="16" letter-spacing="5">A LITTLE SELF-DISCOVERY</text>'+
+ '<text x="450" y="1018" fill="'+p.ink+'" opacity=".55" text-anchor="middle" font-family="Georgia,serif" font-style="italic" font-size="18">A moment to celebrate what makes you, you.</text></svg>';
 }
 function showResultCard(r,kind,key){
  const svg=cardSvg(r,kind,key),src='data:image/svg+xml;charset=utf-8,'+encodeURIComponent(svg);
