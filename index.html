@@ -145,17 +145,32 @@ loveTouch:'<path d="M450 560 C390 500 330 440 350 360 C370 290 435 300 450 360 C
 function cardSvg(r,kind,key){
  const palettes={
   personality:{bg:'#fbf5ff',mid:'#eadcf7',light:'#d7c0eb',ink:'#59456f',accent:'#a987c5',foil:'#c6a36f'},
-  aesthetic:{bg:'#f3f9ff',mid:'#dcebf7',light:'#c5dced',ink:'#3e5b76',accent:'#7fa6c7',foil:'#b69b70'},
+  aesthetic:{bg:'#18254c',mid:'#354d83',light:'#8296c7',ink:'#f7f2ff',accent:'#c4c9f4',foil:'#e6d8bd'},
   love:{bg:'#fff6f4',mid:'#f8e1e4',light:'#efc9d1',ink:'#75485a',accent:'#c17d91',foil:'#c5a078'}
  };
  const p=palettes[kind]||palettes.personality;
- const art=cardArt[key]||cardArt.Observer;
+ const symbol=cardArt[key]||cardArt.Observer;
+ const art='<g opacity=".95">'+
+ '<ellipse cx="450" cy="445" rx="245" ry="205" fill="url(#illustrationGlow)"/>'+
+ '<path d="M235 500 C290 360 350 315 450 300 C550 315 610 360 665 500" fill="none" stroke="url(#illustrationFoil)" stroke-width="3" opacity=".55"/>'+
+ '<path d="M260 535 C315 625 585 625 640 535" fill="none" stroke="#fff" stroke-width="2" opacity=".45"/>'+
+ '<g fill="url(#illustrationPetal)" stroke="#fff" stroke-opacity=".55" stroke-width="2">'+
+ '<ellipse cx="300" cy="420" rx="22" ry="54" transform="rotate(-42 300 420)"/><ellipse cx="326" cy="382" rx="18" ry="45" transform="rotate(-18 326 382)"/>'+
+ '<ellipse cx="600" cy="420" rx="22" ry="54" transform="rotate(42 600 420)"/><ellipse cx="574" cy="382" rx="18" ry="45" transform="rotate(18 574 382)"/>'+
+ '<ellipse cx="350" cy="570" rx="16" ry="39" transform="rotate(-55 350 570)"/><ellipse cx="550" cy="570" rx="16" ry="39" transform="rotate(55 550 570)"/></g>'+
+ '<g fill="none" stroke="url(#illustrationFoil)" stroke-width="3" opacity=".8"><path d="M275 520 Q300 470 325 445 Q345 425 360 390 M625 520 Q600 470 575 445 Q555 425 540 390"/>'+
+ '<path d="M315 555 Q345 535 365 500 M585 555 Q555 535 535 500"/></g>'+
+ '<g fill="#fff" opacity=".85"><circle cx="300" cy="300" r="4"/><circle cx="595" cy="285" r="5"/><circle cx="655" cy="480" r="3"/><circle cx="260" cy="485" r="3"/><circle cx="390" cy="270" r="3"/><circle cx="520" cy="275" r="3"/></g>'+
+ '<g transform="translate(0 0)">'+symbol+'</g></g>';
  const esc=s=>String(s).replace(/[&<>"]/g,ch=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[ch]));
  const eyebrow=kind==='personality'?'YOUR HIDDEN ARCHETYPE':kind==='love'?'YOUR LOVE LANGUAGE':'YOUR AESTHETIC';
  const sparkle=(x,y,scale)=>'<g transform="translate('+x+' '+y+') scale('+scale+')" fill="'+p.foil+'" opacity=".8"><path d="M0 -16 Q3 -3 16 0 Q3 3 0 16 Q-3 3 -16 0 Q-3 -3 0 -16Z"/></g>';
  return '<svg xmlns="http://www.w3.org/2000/svg" width="900" height="1125" viewBox="0 0 900 1125"><defs>'+
  '<linearGradient id="paper" x1="0" y1="0" x2=".8" y2="1"><stop stop-color="'+p.bg+'"/><stop offset=".52" stop-color="'+p.mid+'"/><stop offset="1" stop-color="'+p.light+'"/></linearGradient>'+
  '<radialGradient id="halo"><stop stop-color="#fff" stop-opacity=".98"/><stop offset=".56" stop-color="#fff" stop-opacity=".58"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></radialGradient>'+
+ '<radialGradient id="illustrationGlow"><stop stop-color="#fff" stop-opacity=".88"/><stop offset=".58" stop-color="'+p.accent+'" stop-opacity=".25"/><stop offset="1" stop-color="'+p.accent+'" stop-opacity="0"/></radialGradient>'+
+ '<linearGradient id="illustrationPetal" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#fff" stop-opacity=".9"/><stop offset=".5" stop-color="'+p.light+'"/><stop offset="1" stop-color="'+p.accent+'"/></linearGradient>'+
+ '<linearGradient id="illustrationFoil" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#fff"/><stop offset=".5" stop-color="'+p.foil+'"/><stop offset="1" stop-color="'+p.accent+'"/></linearGradient>'+
  '<linearGradient id="foil" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#fff4d9"/><stop offset=".48" stop-color="'+p.foil+'"/><stop offset="1" stop-color="#fff0d2"/></linearGradient>'+
  '<filter id="softShadow" x="-30%" y="-30%" width="160%" height="160%"><feGaussianBlur in="SourceAlpha" stdDeviation="13" result="blur"/><feOffset dy="12" result="offset"/><feComponentTransfer><feFuncA type="linear" slope=".18"/></feComponentTransfer><feMerge><feMergeNode/><feMergeNode in="SourceGraphic"/></feMerge></filter>'+
  '<pattern id="grain" width="34" height="34" patternUnits="userSpaceOnUse"><circle cx="4" cy="7" r="1" fill="'+p.ink+'" opacity=".055"/><circle cx="23" cy="25" r=".8" fill="'+p.ink+'" opacity=".045"/></pattern></defs>'+
