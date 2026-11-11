@@ -145,7 +145,7 @@ loveTouch:'<path d="M450 560 C390 500 330 440 350 360 C370 290 435 300 450 360 C
 function cardSvg(r,kind,key){
  const palettes={
   personality:{bg:'#fbf5ff',mid:'#eadcf7',light:'#d7c0eb',ink:'#59456f',accent:'#a987c5',foil:'#c6a36f'},
-  aesthetic:{bg:'#18254c',mid:'#354d83',light:'#8296c7',ink:'#f7f2ff',accent:'#c4c9f4',foil:'#e6d8bd'},
+  aesthetic:{bg:'#080d24',mid:'#17264f',light:'#3e4c83',ink:'#fff8ed',accent:'#aeb9ec',foil:'#d8bd91'},
   love:{bg:'#fff6f4',mid:'#f8e1e4',light:'#efc9d1',ink:'#75485a',accent:'#c17d91',foil:'#c5a078'}
  };
  const p=palettes[kind]||palettes.personality;
@@ -160,7 +160,7 @@ function cardSvg(r,kind,key){
  '<ellipse cx="350" cy="570" rx="16" ry="39" transform="rotate(-55 350 570)"/><ellipse cx="550" cy="570" rx="16" ry="39" transform="rotate(55 550 570)"/></g>'+
  '<g fill="none" stroke="url(#illustrationFoil)" stroke-width="3" opacity=".8"><path d="M275 520 Q300 470 325 445 Q345 425 360 390 M625 520 Q600 470 575 445 Q555 425 540 390"/>'+
  '<path d="M315 555 Q345 535 365 500 M585 555 Q555 535 535 500"/></g>'+
- '<g fill="#fff" opacity=".85"><circle cx="300" cy="300" r="4"/><circle cx="595" cy="285" r="5"/><circle cx="655" cy="480" r="3"/><circle cx="260" cy="485" r="3"/><circle cx="390" cy="270" r="3"/><circle cx="520" cy="275" r="3"/></g>'+
+ '<g fill="#fff8e8" opacity=".9"><circle cx="300" cy="300" r="3"/><circle cx="595" cy="285" r="4"/><circle cx="655" cy="480" r="2.5"/><circle cx="260" cy="485" r="2.5"/><circle cx="390" cy="270" r="2.5"/><circle cx="520" cy="275" r="3"/><circle cx="355" cy="610" r="2"/><circle cx="560" cy="620" r="2"/><circle cx="690" cy="590" r="2"/><circle cx="210" cy="390" r="2"/></g>'+
  '<g transform="translate(0 0)">'+symbol+'</g></g>';
  const esc=s=>String(s).replace(/[&<>"]/g,ch=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[ch]));
  const eyebrow=kind==='personality'?'YOUR HIDDEN ARCHETYPE':kind==='love'?'YOUR LOVE LANGUAGE':'YOUR AESTHETIC';
@@ -168,23 +168,23 @@ function cardSvg(r,kind,key){
  return '<svg xmlns="http://www.w3.org/2000/svg" width="900" height="1125" viewBox="0 0 900 1125"><defs>'+
  '<linearGradient id="paper" x1="0" y1="0" x2=".8" y2="1"><stop stop-color="'+p.bg+'"/><stop offset=".52" stop-color="'+p.mid+'"/><stop offset="1" stop-color="'+p.light+'"/></linearGradient>'+
  '<radialGradient id="halo"><stop stop-color="#fff" stop-opacity=".98"/><stop offset=".56" stop-color="#fff" stop-opacity=".58"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></radialGradient>'+
- '<radialGradient id="illustrationGlow"><stop stop-color="#fff" stop-opacity=".88"/><stop offset=".58" stop-color="'+p.accent+'" stop-opacity=".25"/><stop offset="1" stop-color="'+p.accent+'" stop-opacity="0"/></radialGradient>'+
- '<linearGradient id="illustrationPetal" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#fff" stop-opacity=".9"/><stop offset=".5" stop-color="'+p.light+'"/><stop offset="1" stop-color="'+p.accent+'"/></linearGradient>'+
- '<linearGradient id="illustrationFoil" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#fff"/><stop offset=".5" stop-color="'+p.foil+'"/><stop offset="1" stop-color="'+p.accent+'"/></linearGradient>'+
+ '<radialGradient id="illustrationGlow"><stop stop-color="#fff8e8" stop-opacity=".98"/><stop offset=".28" stop-color="#b9c7ff" stop-opacity=".52"/><stop offset=".68" stop-color="#7771c5" stop-opacity=".18"/><stop offset="1" stop-color="#171e48" stop-opacity="0"/></radialGradient>'+
+ '<linearGradient id="illustrationPetal" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#fff6e8"/><stop offset=".38" stop-color="#c6b7ef"/><stop offset=".72" stop-color="#6e79bd"/><stop offset="1" stop-color="#39416f"/></linearGradient>'+
+ '<linearGradient id="illustrationFoil" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#fff9e9"/><stop offset=".5" stop-color="#d8bd91"/><stop offset="1" stop-color="#8b80c6"/></linearGradient>'+
  '<linearGradient id="foil" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#fff4d9"/><stop offset=".48" stop-color="'+p.foil+'"/><stop offset="1" stop-color="#fff0d2"/></linearGradient>'+
  '<filter id="softShadow" x="-30%" y="-30%" width="160%" height="160%"><feGaussianBlur in="SourceAlpha" stdDeviation="13" result="blur"/><feOffset dy="12" result="offset"/><feComponentTransfer><feFuncA type="linear" slope=".18"/></feComponentTransfer><feMerge><feMergeNode/><feMergeNode in="SourceGraphic"/></feMerge></filter>'+
  '<pattern id="grain" width="34" height="34" patternUnits="userSpaceOnUse"><circle cx="4" cy="7" r="1" fill="'+p.ink+'" opacity=".055"/><circle cx="23" cy="25" r=".8" fill="'+p.ink+'" opacity=".045"/></pattern></defs>'+
  '<rect width="900" height="1125" rx="34" fill="url(#paper)"/><rect width="900" height="1125" rx="34" fill="url(#grain)"/>'+
- '<circle cx="450" cy="445" r="345" fill="url(#halo)"/>'+
+ '<circle cx="450" cy="445" r="345" fill="url(#halo)"/><circle cx="690" cy="330" r="175" fill="#7f85d6" opacity=".10"/><circle cx="215" cy="650" r="190" fill="#514b9c" opacity=".12"/>'+
  '<rect x="34" y="34" width="832" height="1057" rx="25" fill="none" stroke="url(#foil)" stroke-width="2.5"/>'+
  '<rect x="48" y="48" width="804" height="1029" rx="19" fill="none" stroke="#fff" stroke-opacity=".8" stroke-width="1.5"/>'+
  '<g fill="none" stroke="url(#foil)" stroke-width="2" opacity=".8"><path d="M95 205 C145 145 205 145 265 205 M635 205 C695 145 755 145 805 205"/><path d="M95 920 C145 980 205 980 265 920 M635 920 C695 980 755 980 805 920"/></g>'+
  '<g fill="none" stroke="'+p.accent+'" stroke-opacity=".36" stroke-width="2"><path d="M92 270 C145 235 165 190 160 145 M92 270 C130 260 155 270 177 300 M808 270 C755 235 735 190 740 145 M808 270 C770 260 745 270 723 300"/><path d="M92 855 C145 890 165 935 160 980 M92 855 C130 865 155 855 177 825 M808 855 C755 890 735 935 740 980 M808 855 C770 865 745 855 723 825"/></g>'+
- '<g fill="'+p.accent+'" opacity=".42"><ellipse cx="151" cy="220" rx="10" ry="25" transform="rotate(-35 151 220)"/><ellipse cx="181" cy="278" rx="9" ry="22" transform="rotate(50 181 278)"/><ellipse cx="749" cy="220" rx="10" ry="25" transform="rotate(35 749 220)"/><ellipse cx="719" cy="278" rx="9" ry="22" transform="rotate(-50 719 278)"/><ellipse cx="151" cy="905" rx="10" ry="25" transform="rotate(35 151 905)"/><ellipse cx="749" cy="905" rx="10" ry="25" transform="rotate(-35 749 905)"/></g>'+
+ '<g fill="'+p.accent+'" opacity=".24"><ellipse cx="151" cy="220" rx="10" ry="25" transform="rotate(-35 151 220)"/><ellipse cx="181" cy="278" rx="9" ry="22" transform="rotate(50 181 278)"/><ellipse cx="749" cy="220" rx="10" ry="25" transform="rotate(35 749 220)"/><ellipse cx="719" cy="278" rx="9" ry="22" transform="rotate(-50 719 278)"/><ellipse cx="151" cy="905" rx="10" ry="25" transform="rotate(35 151 905)"/><ellipse cx="749" cy="905" rx="10" ry="25" transform="rotate(-35 749 905)"/></g>'+
  '<text x="450" y="112" fill="'+p.ink+'" text-anchor="middle" font-family="Georgia,serif" font-size="31" letter-spacing="10">QUIZVERSE</text>'+
  '<path d="M365 145 H535" stroke="url(#foil)" stroke-width="2"/>'+sparkle(350,145,.55)+sparkle(550,145,.55)+
  '<text x="450" y="198" fill="'+p.accent+'" text-anchor="middle" font-family="Arial,sans-serif" font-size="18" letter-spacing="5">'+eyebrow+'</text>'+
- '<circle cx="450" cy="445" r="226" fill="#fff" opacity=".34"/><circle cx="450" cy="445" r="210" fill="none" stroke="#fff" stroke-width="2" opacity=".9"/><circle cx="450" cy="445" r="194" fill="none" stroke="url(#foil)" stroke-width="2" stroke-dasharray="2 12" opacity=".9"/>'+
+ '<circle cx="450" cy="445" r="226" fill="#101a42" opacity=".22"/><circle cx="450" cy="445" r="210" fill="none" stroke="#dce2ff" stroke-width="1.5" opacity=".55"/><circle cx="450" cy="445" r="194" fill="none" stroke="url(#foil)" stroke-width="2" stroke-dasharray="1 14" opacity=".95"/>'+
  '<g filter="url(#softShadow)">'+art+'</g>'+
  sparkle(270,345,.72)+sparkle(630,390,.58)+sparkle(310,575,.48)+sparkle(600,570,.7)+
  '<path d="M185 700 Q450 670 715 700" fill="none" stroke="url(#foil)" stroke-width="2"/>'+
