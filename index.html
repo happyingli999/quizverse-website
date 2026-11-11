@@ -158,9 +158,12 @@ async function shareResultCard(r,kind,key,title,message,buttonId){
   const url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download=file.name;document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),1500);btn.textContent='Card downloaded ✓';
  }catch(e){if(e&&e.name==='AbortError'){btn.textContent='Sharing cancelled';return;}btn.textContent='Try download card below';const fallback=$('download-result-card');if(fallback)fallback.scrollIntoView({behavior:'smooth',block:'center'});}
 }
-function downloadCard(r,kind,key){
- const blob=new Blob([cardSvg(r,kind,key)],{type:'image/svg+xml;charset=utf-8'}),url=URL.createObjectURL(blob),a=document.createElement('a');
- a.href=url;a.download='quizverse-'+key+'-result.svg';document.body.appendChild(a);a.click();a.remove();URL.revokeObjectURL(url);
+async function downloadCard(r,kind,key){
+ try{
+  const blob=await cardPngBlob(r,kind,key),url=URL.createObjectURL(blob),a=document.createElement('a');
+  a.href=url;a.download='quizverse-'+key+'-result.png';document.body.appendChild(a);a.click();a.remove();
+  setTimeout(()=>URL.revokeObjectURL(url),1500);
+ }catch(e){alert('The PNG card could not be created. Please try the Share button or refresh the page.');}
 }
 
 function finish(){let scores=Object.fromEntries(keys.map(k=>[k,0]));chosen.forEach(k=>scores[k]++);let top=keys.reduce((a,b)=>scores[b]>scores[a]?b:a,keys[0]),r=profiles[top];trackEvent("quiz_complete",{quiz_id:"personality",result_id:top});$("result-box").innerHTML=showResultCard(r,'personality',top)+'<div class="symbol">'+r.icon+'</div><div class="eyebrow">Your hidden personality archetype</div><h1>'+r.name+'</h1><h2 style="font-size:1.2rem;margin:0 0 14px">'+r.line+'</h2><p>'+r.desc+'</p><div class="tags">'+r.tags.map(t=>'<span class="tag">'+t+'</span>').join("")+'</div><div class="growth"><b>A little room to grow</b><p>'+r.growth+'</p></div><div class="result-actions"><button class="cta" id="share">Download & share my card ↗</button><button class="cta secondary" id="again">Retake quiz</button></div><p class="note">For entertainment and self-reflection only. This is not a scientific personality assessment or psychological diagnosis.</p>';$("share").onclick=()=>share(r);$("download-result-card").onclick=()=>downloadCard(r,'personality',top);$("again").onclick=begin;show("result");}
